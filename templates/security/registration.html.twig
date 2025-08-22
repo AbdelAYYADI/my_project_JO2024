@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Site des JO-2024 Inscription
+{% endblock title %}
+
+{% block body %}
+    <div class="container w-50 border rounded bg-light-subtle form-control-sm form-label-sm mt-1">
+        <h4 class="mt-3 mb-3 text-center"> Créer votre compte </h4>
+        {{ form_start(formRegistration) }}
+            <div class="row ">
+                <div class="col">
+                    {{ form_row(formRegistration.firstName)}}
+                    {{ form_row(formRegistration.lastName)}}
+                    {{ form_row(formRegistration.phoneNumber)}}
+                    {{ form_row(formRegistration.email)}}
+                    {{ form_row(formRegistration.plainPassword)}}
+                </div>
+                <div class="col">
+                    {{ form_row(formRegistration.adress1)}}
+                    {{ form_row(formRegistration.adress2)}}
+                    <div class="row">
+                        <div class="col-4">{{ form_row(formRegistration.postalCode)}}</div>
+                        <div class="col-8">{{ form_row(formRegistration.city)}}</div>
+                    </div>          
+                    {{ form_row(formRegistration.country)}}
+                </div>
+                <p class="text-danger">* Ces champs sont obligatoires</p>
+            </div>            
+        {{ form_end(formRegistration) }}
+    </div>
+{% endblock body %}
+

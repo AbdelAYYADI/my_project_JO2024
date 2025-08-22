@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification compte utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container w-50 border rounded bg-light-subtle form-control-sm form-label-sm mt-1">
+        <h4 class="mt-3 mb-3 text-center"> Modifier votre compte </h4>
+        {{ form_start(formUser) }}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(formUser.firstName)}}
+                    {{ form_row(formUser.lastName)}}
+                    {{ form_row(formUser.phoneNumber)}}
+                </div>
+                <div class="col">
+                    {{ form_row(formUser.adress1)}}
+                        {{ form_row(formUser.adress2)}}
+                        <div class="row">
+                            <div class="col-4">{{ form_row(formUser.postalCode)}}</div>
+                            <div class="col-8">{{ form_row(formUser.city)}}</div>
+                        </div>          
+                        {{ form_row(formUser.country)}}
+                        <p class="text-danger">* Ces champs sont obligatoires</p>
+                </div>                            
+            </div>
+        {{ form_end(formUser) }}
+    </div>
+{% endblock %}

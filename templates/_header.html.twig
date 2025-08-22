@@ -1,0 +1,111 @@
+{#
+<ul class="nav nav-pills justify-content-end">
+  {% if app.user %}
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{path('app_logout')}}">Décconnexion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{{app.user.firstName}}</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{path('app_login')}}">Connexion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('app_registration')}}">Inscription</a>
+      </li>
+  {% endif %}
+</ul>
+#}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+    
+        <div class="container text-center text-white">
+          <h5>Bienvenu sur le site des Jeux Olympiques Paris-2024</h5>
+        </div>
+		<div>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-2">
+					{{ message }}
+				</div>
+			{% endfor %}    
+		</div>
+    
+		<div class="collapse navbar-collapse justify-content-end" id="navbarColor01">
+				<ul class="navbar-nav justify-content-end flex-grow-1 p-2">
+					{% if app.user %}						
+						<li class="nav-item dropdown" style="margin-right: 5rem;">
+							<a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+									<span class="me-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 10 10">
+											<img src="{{ asset('images/person-circle.svg') }}" alt="---">
+										</svg>
+									</span>							
+								{{ app.user.lastName }} {{ app.user.firstName }}
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('app_user', {id: app.user.id}) }}">
+									<span class="me-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 10 10">
+											<img src="{{ asset('images/person-vcard-fill.svg') }}" alt="---">
+										</svg>
+									</span>
+									Voir mon compte
+								</a>
+								<a class="dropdown-item" href="{{ path('app_password', {id: app.user.id}) }}">
+									<span class="me-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person" viewBox="0 0 10 10" >
+											<img src="{{ asset('images/eye-fill.svg') }}" alt="">
+										</svg>
+									</span>
+									Modifier mot de passe
+								</a>
+								<div class="dropdown-divider"></div>
+								{% if 'ROLE_ADMIN' in app.user.roles %}
+									<a class="dropdown-item" href="#">Administration</a>
+									<div class="dropdown-divider"></div>
+								{% endif %}
+								<a class="dropdown-item" href="{{ path('app_logout') }}">
+									<span class="me-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person" viewBox="0 0 10 10">
+											<img src="{{ asset('images/arrow-right-square-fill.svg') }}" alt="">
+										</svg>
+									</span>
+									Se déconnecter
+								</a>
+							</div>
+						</li>
+					{% else %}
+						<li class="nav-item me-2">
+							<a class="nav-link text-white" href="{{ path('app_login') }}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person" viewBox="0 0 10 10">
+									<img src="{{ asset('images/person-lock.svg') }}" alt="">
+								</svg>
+								Se connecter
+							</a>
+							
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="{{ path('app_registration') }}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person" viewBox="0 0 10 10">
+									<img src="{{ asset('images/person-add.svg') }}" alt="">
+								</svg>
+								Créer un compte
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+      <div class="text-center">
+        <img src="{{ asset('images/drapeau-olympique.gif') }}" alt="JO-2024 Paris">
+      </div>
+</div>
+
