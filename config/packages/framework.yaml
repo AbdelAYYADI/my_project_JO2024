@@ -3,6 +3,8 @@ framework:
     secret: '%env(APP_SECRET)%'
     trusted_proxies: '127.0.0.1,REMOTE_ADDR'
     trusted_headers: [ 'X_FORWARDED_PROTO' ]
+    router:
+        default_uri: 'https://powerful-reef-41038-68a03be757fd.herokuapp.com'
 
 
     # Note that the session will be started ONLY if you read or write from it.
