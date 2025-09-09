@@ -1,0 +1,92 @@
+        
+        <div id="exempleCarrousel" class="carousel carousel-dark slide pointer-event d-none d-md-block bg-info mt-1 mb-2 rounded-5" data-bs-ride="carousel">
+
+            <div class="carousel-inner">
+                {% set firstItem = true %}
+                {% for game in games %}
+                    {% if firstItem == true %}
+                        {% set firstItem = false %}
+                        <div class="carousel-item active" data-bs-interval="3000">
+                    {% else %}
+                        <div class="carousel-item" data-bs-interval="3000">
+                    {% endif %}
+                    <div class="text-center overflow-auto" style="max-height: 400px;">
+                        <div class="mt-1 mb-1">
+                            <h5 class="text-center">{{ game.title }}</h5>
+                        </div>
+                        <img class="img-fluid mt-3 mb-4 mx-auto d-block" style="width: 80%;" src="images/{{ game.image }}" alt="{{ game.title }}">
+                        <div class="mt-4 text-center mx-auto" style="width: 80%; height: 200px;">
+                            <p> {{ game.description }} </p>
+                            <button type="button" class="btn btn-outline-dark btn-lg mb-4" data-bs-toggle="modal" data-bs-target="#gamesHistory">En savoir plus...</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#exempleCarrousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#exempleCarrousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+
+
+    <section>
+        <div class="container">
+            <div class="modal fade" id="gamesHistory" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="text-center">
+                                <a href="{{ path('home.index') }}">
+                                <img src="{{ asset('images/drapeau-olympique.gif') }}" href="" width="50" height="50" alt="JO-2024 Paris">
+                                </a>
+                            </div>
+                            <h4 class="modal-title" id="ModalLabel">Les jeux Olympiques</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% for i in 0..(games|length - 1) %}
+                                <div class="text-center">
+                                    <div class="mt-1 mb-1">
+                                        <h6 class="text-start">{{ games[i].title }}</h6>
+                                    </div>
+                                    <div class="text-start font-size-sm fst-italic">
+                                        <p> {{ games[i].description }} </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+                   
+        </div>
+    </section>
+
+    <div class="container  bg-info text-center overflow-auto rounded-5" style="max-width: 100%; max-height: 450px;">
+        <h3 class="text-center mb-2">Choisir un sport et réserver votre billet</h3>
+        <div class="row justify-content-evenly">
+            {% for game in games %}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-2">
+                    <div class="card mb-3 p-2" style="max-width: 250px; max-height: 150px;  margin: auto;">
+                    <img src="{{ asset('images/'~ game.image) }}" alt="{{ game.name }}" class="card-img-top" style="height: 150px; object-fit: cover;">
+                    <div class="card-body p-2 text-center">
+                        <h5 class="card-title mb-1">{{ game.name }}</h5>                            
+                        <a href="{{ path('app_event', {sport: game.id}) }}" class="btn btn-md btn-outline-secondary mt-2">Voir le calendrier</a>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+        

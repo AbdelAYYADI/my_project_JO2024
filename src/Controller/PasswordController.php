@@ -55,7 +55,7 @@ final class PasswordController extends AbstractController
             return $this->redirectToRoute('home.index');
         }
 
-        return $this->render('user/updatePassword.html.twig', [
+        return $this->render('security/updatePassword.html.twig', [
             'formPassword' => $form
         ]);
     }

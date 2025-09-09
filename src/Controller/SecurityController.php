@@ -45,14 +45,13 @@ class SecurityController extends AbstractController
             foreach ($errors as $error) {
                 $this->addFlash('error', $error->getMessage());
             }
-
         }
 
         //Formulaire submitted and valide
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $this->addFlash('success', 'Votre compte a bien été créé');
+            $this->addFlash('success', 'Votre compte a été créé avec succès');
 
             //$userKey = UUID_TO_BIN($user->getSecurityKey());
 

@@ -25,23 +25,28 @@
 		</button>
 
 		<div class="text-center">
-			<img src="{{ asset('images/drapeau-olympique.gif') }}" width="50" height="50" alt="JO-2024 Paris">
+			<a href="{{ path('home.index') }}">
+			<img src="{{ asset('images/drapeau-olympique.gif') }}" href="" width="50" height="50" alt="JO-2024 Paris">
+			</a>
 		</div>
 
-        <div class="container text-center text-white">
-          <h5>Bienvenu sur le site des Jeux Olympiques Paris-2024</h5>
-        </div>
-
-		<div>
-			{% for message in app.flashes('success') %}
+        <div class="container d-flex justify-content-between  align-items-center text-center text-white">
+          	<h5>Bienvenu sur le site des Jeux Olympiques Paris-2024</h5>
+						{% for message in app.flashes('success') %}
 				<div class="alert alert-success mt-2">
 					{{ message }}
 				</div>
 			{% endfor %}    
+
 		</div>
     
-		<div class="collapse navbar-collapse justify-content-end" id="navbarColor01">
-				<ul class="navbar-nav justify-content-end flex-grow-1 p-2">
+		<div class="collapse navbar-collapse justify-content-end " id="navbarColor01">
+			<div class="justify-content-center">
+				
+				<img src="{{ asset('images/panier.svg') }}" width="50" height="50" alt="panier">				
+			</div>
+			<ul class="navbar-nav justify-content-end flex-grow-1 p-2">
+					
 					{% if app.user %}						
 						<li class="nav-item dropdown" style="margin-right: 5rem;">
 							<a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

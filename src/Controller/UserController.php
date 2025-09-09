@@ -48,7 +48,7 @@ final class UserController extends AbstractController
             return $this->redirectToRoute('home.index');
         }
         
-        return $this->render('user/updateUser.html.twig', [
+        return $this->render('security/updateUser.html.twig', [
             'formUser' => $form
         ]);
     }
