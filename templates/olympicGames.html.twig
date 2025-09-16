@@ -10,14 +10,15 @@
                     {% else %}
                         <div class="carousel-item" data-bs-interval="3000">
                     {% endif %}
-                    <div class="text-center overflow-auto" style="max-height: 400px;">
-                        <div class="mt-1 mb-1">
-                            <h5 class="text-center">{{ game.title }}</h5>
-                        </div>
+                    <div class="text-center" style="max-height: 400px;">
                         <img class="img-fluid mt-3 mb-4 mx-auto d-block" style="width: 80%;" src="images/{{ game.image }}" alt="{{ game.title }}">
-                        <div class="mt-4 text-center mx-auto" style="width: 80%; height: 200px;">
-                            <p> {{ game.description }} </p>
-                            <button type="button" class="btn btn-outline-dark btn-lg mb-4" data-bs-toggle="modal" data-bs-target="#gamesHistory">En savoir plus...</button>
+                        <div class="mt-1 mb-1">
+                            <p class="text-center">{{ game.title }}</p>
+                            <p> {{ game.description|slice(0, 200) ~ '...' }} </p>
+                        </div>
+                        <div class="mt-2 text-center mx-auto" style="width: 80%; height: 200px;">
+                          {#  <p> {{ game.description|slice(0, 200) ~ '...' }} </p> #}
+                            <button type="button" class="btn btn-outline-dark btn-lg mb-2" data-bs-toggle="modal" data-bs-target="#gamesHistory">En savoir plus...</button>
                         </div>
                     </div>
                 </div>
@@ -52,13 +53,13 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                         </div>
                         <div class="modal-body">
-                            {% for i in 0..(games|length - 1) %}
+                            {% for game in games %}
                                 <div class="text-center">
                                     <div class="mt-1 mb-1">
-                                        <h6 class="text-start">{{ games[i].title }}</h6>
+                                        <h6 class="text-start">{{ game.title }}</h6>
                                     </div>
                                     <div class="text-start font-size-sm fst-italic">
-                                        <p> {{ games[i].description }} </p>
+                                        <p> {{ game.description }} </p>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -73,8 +74,8 @@
         </div>
     </section>
 
-    <div class="container  bg-info text-center overflow-auto rounded-5" style="max-width: 100%; max-height: 450px;">
-        <h3 class="text-center mb-2">Choisir un sport et réserver votre billet</h3>
+    <div class="container bg-info text-center overflow-auto rounded-5" style="max-width: 100%; max-height: 450px;">
+        <h3 class="text-center mb-2 text-danger mb-2">Choisir un sport et réserver votre billet</h3>
         <div class="row justify-content-evenly">
             {% for game in games %}
                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">

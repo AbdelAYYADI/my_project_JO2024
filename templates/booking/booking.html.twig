@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier des évènements{% endblock %}
+
+{% block body %}
+    <div class="container bg-info text-center overflow-auto rounded-5 mt-3"  style="max-width: 90%;">
+        <img class="img-fluid my-4 mx-auto d-block" style="width: 100%;" src="/images/{{ event.sport.image ?? 'default.jpg' }}" alt="{{ event.sport.name }}">
+    </div>
+
+    <div class="container bg-info text-center rounded-5 mt-3"  style="max-width: 90%; margin: auto;">
+
+        <div class="row m-3" style="margin: auto;">
+            <div class="col">
+                <div class="card m-3 p-2 h-300">
+                    <div class="card-header">
+                        <h5>{{ event.title }}</h5>
+                    </div>
+                    <div class="card-body mb-2 p-2 text-center">
+                        
+                        <div class="accordion mx-auto text-start" id="accordion1">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading1">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                        <strong>{{ event.location ~ '...' }}</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1" data-bs-parent="#accordion1">
+                                    <div class="accordion-body">
+                                        {% for programm in event.programEvent %}
+                                            <p><strong>.</strong> {{ programm }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>                                
+                        </div>                            
+                    </div>
+                </div>
+            </div>            
+            <div class="col">                
+                <div class="container bg-light text-start m-3 p-3 rounded">
+                    <strong><p class="fs-5 bg-secondary-subtle text-center text-danger m-2 ">Prix billet unitaire : {{ event.ticketPrice }} €</p></strong>
+                    <div class="container rounded border border-dark-subtle">
+                    {% for price in priceOffer %}
+                        {% set i = loop.index0 %}
+                        <div class="form-check m-4">
+                            {% if i == 0 %}
+                                <input class="form-check-input" type="radio" name="radioPrice" id="radioPrice{{ i }}" value="{{ price.numberPerson }}" data-person="{{ price.numberPerson }}" data-rate="{{ price.rateDiscount }}" checked>
+                            {% else %}
+                                <input class="form-check-input" type="radio" name="radioPrice" id="radioPrice{{ i }}" value="{{ price.numberPerson }}" data-person="{{ price.numberPerson }}" data-rate="{{ price.rateDiscount }}">
+                            {% endif %}
+                            <strong><label class="form-check-label" for="radioPrice{{ i }}"> {{ price.name }} </label></strong>
+                            <label class="form-check-label" for="radioPrice{{ i }}">  - {{ price.numberPerson }} Personne(s)</label>
+                            {% if price.rateDiscount != 0 %}
+                                <label class="form-check-label" for="radioPrice{{ i }}">  - Réduction de {{ price.rateDiscount }} %</label>
+                            {% endif %}
+                        </div>
+                    {% endfor %}  
+                    </div>     
+                    <div class="container mt-2 rounded border border-dark-subtle">         
+                    {{ form_start(formBooking) }}
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(formBooking.nbrPerson) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(formBooking.grossPrice) }}                                   
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(formBooking.rateDiscount) }}                                                                
+                            </div>                           
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-md-4">
+                                {{ form_row(formBooking.netPrice) }}                                   
+                            </div>
+                            <div class="col-md-4">
+                                <strong>{{ form_row(formBooking.netTotal) }}</strong>
+                            </div>
+                        </div>
+                        <div> <strong> {{ form_row(formBooking.fullName) }} </strong></div>
+                        <div id="participants-fields" class="mt-3"></div>
+                    {{ form_end(formBooking) }}       
+                    </div>     
+                </div>                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+  {% block importmap %}<script src="{{ asset('js/scripts.js') }}"> </script>{% endblock %}
+

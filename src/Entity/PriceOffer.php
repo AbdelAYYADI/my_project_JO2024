@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\PriceOfferRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +24,12 @@ class PriceOffer
 
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $rateDiscount = null;
+
+    
+    public function __construct()
+    {
+    
+    }
 
     public function getId(): ?int
     {
@@ -63,4 +71,5 @@ class PriceOffer
 
         return $this;
     }
+
 }
