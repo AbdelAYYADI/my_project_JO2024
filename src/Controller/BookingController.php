@@ -2,16 +2,15 @@
 
 namespace App\Controller;
 
-use App\Form\BookingType;
 use App\Entity\Event;
-use App\Entity\Booking;
-use App\Entity\PriceOffer;
 use DateTimeImmutable;
+use App\Entity\Booking;
+use App\Form\BookingType;
+use App\Entity\PriceOffer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class BookingController extends AbstractController
@@ -27,7 +26,7 @@ final class BookingController extends AbstractController
         $event      = $manager->getRepository(Event::class)->find($event_id);
         
         $booking = new Booking();
-
+        
         if ( $user ) {
             $booking->setUser($user);
             $booking->setFullName($user->getFirstName().' '.$user->getLastName());        
@@ -43,12 +42,12 @@ final class BookingController extends AbstractController
 
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
-
+        
         //Formulaire submitted and valide
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $booking = $form->getData();
             //dd($booking);
+            $booking = $form->getData();
+            
             //$booking->setNetPrice($event->getTicketPrice()*(1 - ));
             $participants = $request->get('participantsNames'); // un tableau
             $booking->setPersonList($participants);
