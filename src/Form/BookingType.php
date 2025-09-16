@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Form;
+
 use Assert\NotNull;
 use Assert\NotBlank;
 use App\Entity\Booking;

@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use BookingType;
-use App\Entity\user;
+use App\Form\BookingType;
 use App\Entity\Event;
 use App\Entity\Booking;
 use App\Entity\PriceOffer;
