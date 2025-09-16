@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div> <strong> {{ form_row(formBooking.fullName) }} </strong></div>
-                        <div id="participants-fields" class="mt-3"></div>
+                        <div id="participants-fields" class="mt-3"></div>                    
                     {{ form_end(formBooking) }}       
                     </div>     
                 </div>                
@@ -88,9 +88,8 @@
 
 {% endblock %}
 
-{#
- {% block javascripts %}
+{% block javascripts %}
     <script src="{{ asset('js/scripts.js') }}"> </script>
 {% endblock %}
-#}
+
 
