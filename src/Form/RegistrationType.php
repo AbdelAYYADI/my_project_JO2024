@@ -211,12 +211,10 @@ class RegistrationType extends AbstractType
                         'max' => 20,
                         'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
                     ]),
-                    /*
                     new PasswordStrength(
                         minScore: PasswordStrength::STRENGTH_STRONG,
-                        message: 'Veuillez saisir un mot de passe fort',
-                    )
-                    */
+                        message: 'Veuillez saisir un mot de passe fort, ex : Dupont@Jeux2024Paris',
+                    )                    
                 ],
                 'first_options' => [
                     'attr' => [

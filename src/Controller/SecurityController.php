@@ -38,6 +38,8 @@ class SecurityController extends AbstractController
     {
      
         $user = new User();
+        //Il s'agit d'un mot de passe provisoire pour valider l'objet
+        //Il sera ensuite màj à parir du mot de passe saisie après hachage
         $user->setPassword('xxxxxxxxxx');
         $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationType::class, $user);
