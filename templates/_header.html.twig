@@ -1,22 +1,3 @@
-{#
-<ul class="nav nav-pills justify-content-end">
-  {% if app.user %}
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{{path('app_logout')}}">Décconnexion</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">{{app.user.firstName}}</a>
-      </li>
-    {% else %}
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{{path('app_login')}}">Connexion</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_registration')}}">Inscription</a>
-      </li>
-  {% endif %}
-</ul>
-#}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	<div class="container-fluid">
@@ -85,6 +66,8 @@
 								<div class="dropdown-divider"></div>
 								{% if 'ROLE_ADMIN' in app.user.roles %}
 									<a class="dropdown-item" href="#">Administration</a>
+									{# To do ....#}
+									{# Menu admin pour ajouter des offres ou consulter les stats de ventes...#}
 									<div class="dropdown-divider"></div>
 								{% endif %}
 								<a class="dropdown-item" href="{{ path('app_logout') }}">

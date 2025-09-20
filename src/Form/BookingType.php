@@ -87,7 +87,7 @@ class BookingType extends AbstractType {
             'data_class' => Booking::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'booking_form', // Make sure this matches if set manually
+            'csrf_token_id'   => 'booking_form', 
         ]);
     }
 

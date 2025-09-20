@@ -16,9 +16,5 @@ services:
     App\:
         resource: '../src/'
 
-    App\EntityListner\:
-        resource: "../src/EntityListner/"
-        tags: ["doctrine.orm.entity_listner"]
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

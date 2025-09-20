@@ -5,14 +5,17 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SecurityController extends AbstractController
 {
+    private UserPasswordHasherInterface $passwordHasher;
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -26,10 +29,12 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+
+
     }
 
     #[Route('/registration', name: 'app_registration', methods: ['GET', 'POST'])]
-    public function registration(Request $request, EntityManagerInterface $manager): Response
+    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher): Response
     {
      
         $user = new User();
@@ -51,9 +56,10 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPlainPassword());
+            $user->setPassword($hashedPassword);
+            //dd($user);
             $this->addFlash('success', 'Votre compte a été créé avec succès');
-
-            //$userKey = UUID_TO_BIN($user->getSecurityKey());
 
             $manager->persist($user);
             $manager->flush();

@@ -1,11 +1,14 @@
 <?php
 
+/*
 namespace App\EntityListner;
 
 use App\Entity\User;
 use Doctrine\ORM\Events;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+
 
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: User::class)]
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: User::class)]
@@ -33,7 +36,10 @@ class UserListner
      * @param User $user
      * @return void
      */
-  
+
+
+
+/*
     public function encodePassword(User $user)
     {
         if($user->getPlainPassword() === null) {
@@ -45,3 +51,5 @@ class UserListner
 
     }
 }
+
+*/
