@@ -19,17 +19,18 @@ class BookingRepository extends ServiceEntityRepository
     //    /**
     //     * @return Booking[] Returns an array of Booking objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        public function findByIsConfirmed($user, $confirmed): array
+        {
+            return $this->createQueryBuilder('b')
+                ->andWhere('b.user = :valUser')
+                ->andWhere('b.isConfirmed = :valConfirmed')
+                ->setParameter('valUser', $user)
+                ->setParameter('valConfirmed', $confirmed)
+                ->orderBy('b.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+         }
 
     //    public function findOneBySomeField($value): ?Booking
     //    {

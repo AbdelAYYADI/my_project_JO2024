@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class BookingController extends AbstractController
@@ -48,7 +50,6 @@ final class BookingController extends AbstractController
             //dd($booking);
             $booking = $form->getData();
             
-            //$booking->setNetPrice($event->getTicketPrice()*(1 - ));
             $participants = $request->get('participantsNames'); // un tableau
             $booking->setPersonList($participants);
 
@@ -72,5 +73,38 @@ final class BookingController extends AbstractController
         ]);
 
     }
+
+    #[Route('/booking', name: 'app_panier',  methods: ['POST', 'GET'])]
+    public function showPanier(EntityManagerInterface $manager, Request $request): Response
+    {
+        $user = $this->getUser();
+        $bookings = $manager->getRepository(Booking::class)->findByIsConfirmed($user, false);
+
+        return $this->render('booking/panier.html.twig', [
+            'formPanier' => $bookings
+        ]);
+    }
     
+    #[Route('/booking/delete/{id}', name: 'app_del_booking', methods: ['POST'])]
+    public function deleteFromPanier(Request $request, EntityManagerInterface $manager, int $id, CsrfTokenManagerInterface $csrfTokenManager): Response
+    {
+        $booking = $manager->getRepository(Booking::class)->find($id);
+
+        if (!$booking) {
+            throw $this->createNotFoundException('Réservation non trouvée ' . $id);
+        }
+
+        $token = new CsrfToken('delete' . $id, $request->request->get('_token'));
+        if (!$csrfTokenManager->isTokenValid($token)) {
+            throw $this->createAccessDeniedException('Token CSRF invalide');
+        }
+
+        $manager->remove($booking);
+        $manager->flush();
+
+        $this->addFlash('success', 'La réservation a bien été supprimée');
+
+        return $this->redirectToRoute('app_panier');
+    }
+
 }
