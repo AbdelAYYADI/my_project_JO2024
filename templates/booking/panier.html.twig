@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 {% set total = 0 %}
-                {% for booking in formPanier %}
+                {% for booking in bookings %}
                     {% set total = total + booking.netTotal %}
                     <tr>
                         <td>{{ booking.fullName }}</td>

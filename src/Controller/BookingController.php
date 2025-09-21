@@ -81,7 +81,7 @@ final class BookingController extends AbstractController
         $bookings = $manager->getRepository(Booking::class)->findByIsConfirmed($user, false);
 
         return $this->render('booking/panier.html.twig', [
-            'formPanier' => $bookings
+            'bookings' => $bookings
         ]);
     }
     
