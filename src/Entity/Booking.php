@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -38,6 +39,9 @@ class Booking
     #[ORM\Column]
     private ?bool $isConfirmed = null;
 
+    #[ORM\Column(type: 'uuid')]
+    private ?Uuid $bookingKey = null;
+
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Event $event = null;
@@ -49,9 +53,13 @@ class Booking
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private ?array $personList = null;
 
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    private ?Payment $payment = null;
+
+
     public function __construct()
     {
-        
+        $this->bookingKey = Uuid::V7();
     }
 
     public function getId(): ?int
@@ -156,6 +164,18 @@ class Booking
         return $this;
     }
 
+    public function getBookingKey(): ?Uuid
+    {
+        return $this->bookingKey;
+    }
+
+    public function setBookingKey(Uuid $bookingKey): static
+    {
+        $this->bookingKey = $bookingKey;
+
+        return $this;
+    }
+
     public function getEvent(): ?Event
     {
         return $this->event;
@@ -188,6 +208,18 @@ class Booking
     public function setPersonList(?array $personList): static
     {
         $this->personList = $personList;
+
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): static
+    {
+        $this->payment = $payment;
 
         return $this;
     }

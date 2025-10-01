@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Booking;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Booking>
@@ -16,10 +17,12 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    //    /**
-    //     * @return Booking[] Returns an array of Booking objects
-    //     */
-        public function findByIsConfirmed($user, $confirmed): array
+    /**
+     * @param User $user
+     * @param bool $confirmed
+     * @return Booking[]  // or whatever entity is being returned
+     */
+    public function findByIsConfirmed($user, $confirmed): array
         {
             return $this->createQueryBuilder('b')
                 ->andWhere('b.user = :valUser')
@@ -31,6 +34,20 @@ class BookingRepository extends ServiceEntityRepository
                 ->getResult()
             ;
          }
+
+        public function getNetTotalSumByUser(User $user, bool $isConfirmed): ?float
+        {
+            $manager = $this->getEntityManager();
+            $query = $manager->createQuery(
+                'SELECT SUM(b.netTotal)
+                FROM App\Entity\Booking b
+                WHERE b.user = :user AND b.isConfirmed = :isConfirmed'
+            );
+            $query->setParameter('user', $user);
+            $query->setParameter('isConfirmed', $isConfirmed);
+
+            return (float) $query->getSingleScalarResult(); // returns float|0.0
+        }
 
     //    public function findOneBySomeField($value): ?Booking
     //    {

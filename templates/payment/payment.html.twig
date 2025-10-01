@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container bg-info text-center rounded-5 mt-3"  style="max-width: 90%; margin: auto;">
+        <div class="row m-3 bg-info rounded align-items-end" style="margin: auto;">
+            <div class="col">
+                <div class="container bg-light text-start m-3 p-3">
+                {{ form_start(formPayment) }}
+                    <h5> Nom et pérnom : {{ user.firstName}} - {{ user.lastName}}</h5>
+                {{ form_end(formPayment) }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="container bg-light text-start m-3 p-2 rounded">
+                    <p><label class="form-label">N° carte bancaire :</p>
+                    <p><input class="form-control" id="num-carte" name="num-carte" type="text"></p>
+                    <p><label class="form-label">Expire le :</p>
+                    <p><input class="form-control" id="exp-carte" name="exp-carte" type="text" placeholder="AA/MM"></p>
+                    <p><label class="form-label">Cryptogramme :</p>
+                    <p><input class="form-control" id="crypto-carte" name="crypto-carte" type="text" placeholder="XXX"></p>
+                    <p><label class="form-label">Titulaire de la carte :</p>
+                    <p><input class="form-control" id="user-carte" name="user-carte" type="text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

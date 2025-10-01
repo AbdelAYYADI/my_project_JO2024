@@ -7,7 +7,10 @@ use DateTimeImmutable;
 use App\Entity\Booking;
 use App\Form\BookingType;
 use App\Entity\PriceOffer;
+use App\Service\PdfGenerator;
+use App\Service\QrCodeGenerator;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Expr\AssignOp\Concat;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -105,6 +108,27 @@ final class BookingController extends AbstractController
         $this->addFlash('success', 'La réservation a bien été supprimée');
 
         return $this->redirectToRoute('app_panier');
+    }
+
+    #[Route('/booking-pdf/{id}', name: 'app_booking_pdf',  methods: ['POST', 'GET'])]
+    public function generateBookingPdf(EntityManagerInterface $manager, PdfGenerator $pdf, QrCodeGenerator $qrCodeGenerator, int $id) : Response
+    {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $booking = $manager->getRepository(Booking::class)->find($id);
+
+        $qrCode = $qrCodeGenerator->generateQrCode($booking->getBookingKey().'|'.$user->getSecurityKey()); 
+        
+        $html = $this->renderView('payment/bookingPdf.html.twig', [
+                                    'booking' => $booking,
+                                    'qrCode' => $qrCode
+                                    ]
+                                );
+
+        return new Response($pdf->streamPdfFile($html, 'reservation-'.$booking->getId()), 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
+
     }
 
 }

@@ -51,6 +51,15 @@
 								{{ app.user.lastName }} {{ app.user.firstName }}
 							</a>
 							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('app_commande') }}">
+									<span class="me-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 10 10">
+											<img src="{{ asset('images/person-vcard-fill.svg') }}" alt="---">
+										</svg>
+									</span>
+									Voir mes commandes
+								</a>
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{{ path('app_user', {id: app.user.id}) }}">
 									<span class="me-2">
 										<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 10 10">

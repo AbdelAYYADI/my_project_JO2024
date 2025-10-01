@@ -1,0 +1,47 @@
+
+<style>
+    .saut-page-pdf {
+        page-break-after: always;
+    }
+</style>
+
+{% block body %}
+    {% if bookings is defined %}
+        {% for booking in bookings %}
+            <h4>Réservation N° : {{ booking.id }}</h4> 
+            <p>Nom et prénom : {{ booking.fullName }}</p>
+            <p>Autres participants : 
+                {% if booking.personList is not empty %}
+                    {{ booking.personList|join(', ') }}
+                {% else %}
+                    -
+            {% endif %}
+            </p>
+            <p>Sport : {{ booking.event.name }}</p>
+            <p>Epreuve : {{ booking.event.title }}</p>
+            <p>Programme : {{ booking.event.programEvent|join(' - ') }}</p>
+            <p>Date : {{ booking.event.dateEvent.format('d-m-Y') }}</p>
+            <p>Lieu : {{ booking.event.location }}</p>
+            <img src="{{ qrCodes[booking.id] }}" alt="QR Code">        
+            <div class="saut-page-pdf"></div>
+        {% endfor %}            
+    {% else %}
+        <h4>Réservation N° : {{ booking.id }}</h4> 
+        <p>Nom et prénom : {{ booking.fullName }}</p>
+        <p>Autres participants : 
+            {% if booking.personList is not empty %}
+                {{ booking.personList|join(', ') }}
+            {% else %}
+                -
+        {% endif %}
+        </p>
+        <p>Sport : {{ booking.event.name }}</p>
+        <p>Epreuve : {{ booking.event.title }}</p>
+        <p>Programme : {{ booking.event.programEvent|join(' - ') }}</p>
+        <p>Date : {{ booking.event.dateEvent.format('d-m-Y') }}</p>
+        <p>Lieu : {{ booking.event.location }}</p>
+        <img src="{{ qrCode }}" alt="QR Code">
+    {% endif %}
+
+{% endblock %}     
+

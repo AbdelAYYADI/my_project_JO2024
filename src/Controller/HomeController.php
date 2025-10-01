@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     {
         //$games = $this->repository->findAll();
         $games = $manager->getRepository(Sport::class)->findAll();
-
+        
         $user = $this->getUser();
         $bookings = $manager->getRepository(Booking::class)->findByIsConfirmed($user, false);
             

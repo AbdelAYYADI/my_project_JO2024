@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container border rounded bg-light-subtle mt-5 text-start">
+        <h4 class="bg-secondary-subtle fs-4 text-center mt-2 p-3" style="width:100%">Mes commandes validées</h4>
+        {% for commande in commandes %}            
+            {% set i = loop.index0 %}
+            <div class="accordion mx-auto text-start" id="accordion{{ i }}">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{ i }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ i }}" aria-expanded="false" aria-controls="collapse{{ i }}">
+                            <div class="d-flex justify-content-around w-100">
+                                <span>Commande n° : {{ commande.id }}</span>
+                                <span>du : {{ commande.dateTicket.format('d-m-Y') }}</span>
+                                <span>Total payé : {{ commande.totalPrice }} €</span>
+                                <a href="{{ path('app_commande_pdf', {'id': commande.id}) }}" class="ms-2">
+                                    <img src="{{ asset('images/download.svg') }}" alt="Télécharger" style="width: 20px; height: 20px;">
+                                </a>
+                            </div>                                                     
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapse{{ i }}" class="accordion-collapse collapse" aria-labelledby="heading{{ i }}" data-bs-parent="#accordion{{ i }}">
+                    <div class="accordion-body">
+                        <table class="table table-striped caption-top mt-2">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>N° commande</th>
+                                    <th>N° Réservation</th>
+                                    <th>Nom complet</th>
+                                    <th>Participants</th>
+                                    <th>Epreuve</th>
+                                    <th>Titre</th>
+                                    <th>Lieu</th>
+                                    <th>Date</th>
+                                    <th>Prix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for booking in commande.bookings %}
+                                        <tr>
+                                            <td>{{ commande.id }}</td>
+                                            <td>{{ booking.id }}</td>
+                                            <td>{{ booking.fullName }}</td>                            
+                                            <td>-</td>
+                                            <td>{{ booking.event.name}}</td>
+                                            <td>{{ booking.event.title}}</td>
+                                            <td>{{ booking.event.location}}</td>
+                                            <td>{{ booking.event.dateEvent.format('d-m-Y') }}</td>
+                                            <td class="text-end">{{ booking.netTotal }}</td>
+                                            <td><a href="{{ path('app_booking_pdf', {'id': booking.id}) }}" ><img src="{{ asset('images/download.svg') }}" alt="Télecharger" style="width: 20px; height: 20px;"></a></td>
+                                        </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>        
+            
+        {% endfor %}
+    </div>
+
+{% endblock %}

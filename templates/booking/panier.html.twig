@@ -55,14 +55,14 @@
         
         <div class="container bg-secondary-subtle mt-4 mb-2 p-2 d-flex justify-content-between">
             <a href="{{ path('home.index') }}" class="btn btn-outline-dark">
-                Continuer vos réservations
+                Continuer mes réservations
             </a>
             {# Ajouter dans action le redirection vers la page de paiement #}
-            <form method="post" action="#">
-                <button class="btn btn-dark" type="submit">
+            {% if (app.user and total != 0) %}
+                <a href="{{ path('app_payment') }}" class="btn btn-outline-dark">
                     Passer au paiement
-                </button>
-            </form>
+                </a>
+            {% endif %}
         </div>    
 
 {% endblock %}
