@@ -117,10 +117,11 @@ final class BookingController extends AbstractController
         $user = $this->getUser();
         $booking = $manager->getRepository(Booking::class)->find($id);
 
-        //$qrCode = $qrCodeGenerator->generateQrCode($booking->getBookingKey().'|'.$user->getSecurityKey()); 
+        $qrCode = $qrCodeGenerator->generateQrCode($booking->getBookingKey().'|'.$user->getSecurityKey()); 
         
         $html = $this->renderView('payment/bookingPdf.html.twig', [
-                                    'booking' => $booking
+                                    'booking' => $booking,
+                                    'qrCode' => $qrCode
                                     ]
                                 );
 
