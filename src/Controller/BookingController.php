@@ -124,7 +124,7 @@ final class BookingController extends AbstractController
                                     ]
                                 );
 
-        return new Response($pdf->showPfdFile($html, 'reservation-'.$booking->getId()), 200, [
+        return new Response($pdf->streamPdfFile($html, 'reservation-'.$booking->getId()), 200, [
             'Content-Type' => 'application/pdf',
         ]);
 
