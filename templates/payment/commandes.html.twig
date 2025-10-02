@@ -14,7 +14,7 @@
                             <div class="d-flex justify-content-around w-100">
                                 <span>Commande n° : {{ commande.id }}</span>
                                 <span>du : {{ commande.dateTicket.format('d-m-Y') }}</span>
-                                <span>Total payé : {{ commande.totalPrice }} €</span>
+                                <span>Total payé : {{ commande.totalPrice|number_format('2', ',', ' ') }} €</span>
                                 <a href="{{ path('app_commande_pdf', {'id': commande.id}) }}" class="ms-2">
                                     <img src="{{ asset('images/download.svg') }}" alt="Télécharger" style="width: 20px; height: 20px;">
                                 </a>
@@ -49,7 +49,7 @@
                                             <td>{{ booking.event.title}}</td>
                                             <td>{{ booking.event.location}}</td>
                                             <td>{{ booking.event.dateEvent.format('d-m-Y') }}</td>
-                                            <td class="text-end">{{ booking.netTotal }}</td>
+                                            <td class="text-end">{{ booking.netTotal|number_format('2', ',', ' ') }} €</td>
                                             <td><a href="{{ path('app_booking_pdf', {'id': booking.id}) }}" ><img src="{{ asset('images/download.svg') }}" alt="Télecharger" style="width: 20px; height: 20px;"></a></td>
                                         </tr>
                                     {% endfor %}
