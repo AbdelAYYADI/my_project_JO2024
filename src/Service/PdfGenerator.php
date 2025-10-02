@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\HttpFoundation\Response;
 
 class PdfGenerator {
 
