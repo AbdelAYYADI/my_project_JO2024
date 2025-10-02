@@ -15,6 +15,7 @@ class PdfGenerator {
         $this->domPdf = new Dompdf();
         
         $pdfOptions = new Options();
+        $pdfOptions->setTempDir('/tmp');
         $pdfOptions->setDefaultPaperSize('A4');
         $pdfOptions->setDefaultPaperOrientation('portrait');
         $pdfOptions->setIsRemoteEnabled(true);
