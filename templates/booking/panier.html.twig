@@ -34,7 +34,7 @@
                         <td>{{ booking.event.title }}</td>
                         <td>{{ booking.event.location }}</td>
                         <td>{{ booking.event.dateEvent.format('d-m-Y H:i') }}</td>
-                        <td class="text-end">{{ booking.netTotal }} €</td>
+                        <td class="text-end">{{ booking.netTotal|number_format(2, ',', ' ') }} €</td>
                         {# <td class="text-center"><a href="{{ path('app_del_booking', {id: booking.id}) }}"><img src="{{ asset('images/trash.svg') }}" href="" alt="Supprimer"></a></td> #}
                         <td class="text-center">
                             <form method="post" action="{{ path('app_del_booking', {'id': booking.id}) }}" style="display:inline;" onsubmit="return confirm('Supprimer cette réservation ?');">
@@ -47,8 +47,8 @@
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="6" class="text-end fw-bold">Total :</td>
-                    <td class="text-end fw-bold">{{ total }} €</td>
+                    <td colspan="6" class="text-end fs-5 text-primary fw-bold">Total :</td>
+                    <td class="text-end fs-5 fw-bold text-primary">{{ total|number_format(2, ',', ' ') }} €</td>
                 </tr>
             </tbody>
         </table>
