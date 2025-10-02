@@ -12,7 +12,8 @@ use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 
 class QrCodeGenerator
 {
-    public function generateQrCode(string $data = 'https://google.fr'): string
+    //Cette méthode retourne un QrCode
+    public function generateQrCode(string $data = ''): string
     {
          $qrCode = new QrCode(
             data: $data,

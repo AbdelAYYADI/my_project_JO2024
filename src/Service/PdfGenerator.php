@@ -14,6 +14,7 @@ class PdfGenerator {
         
         $this->domPdf = new Dompdf();
         
+        //Définir les options du document PDF
         $pdfOptions = new Options();
         $pdfOptions->setTempDir('/tmp');
         $pdfOptions->setDefaultPaperSize('A4');
@@ -23,6 +24,7 @@ class PdfGenerator {
         $this->domPdf->setOptions($pdfOptions);
     }
 
+    //Cette méthode télécharge le fichier PDF
     public function streamPdfFile($html, $nameFile) {
         ob_start();
         $this->domPdf->loadHtml($html);
@@ -31,6 +33,7 @@ class PdfGenerator {
         ob_end_clean();
     }
 
+    //Cette méthode ouvre le fichier PDF dans le navigateur
     public function showPfdFile($html) : string {
         ob_start();
         $this->domPdf->loadHtml($html);
