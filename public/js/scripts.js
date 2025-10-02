@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  radios.forEach(radio => {
+    radios.forEach(radio => {
     radio.addEventListener('click', () => {
       const personCount = radio.dataset.person;
        if (personCount) {

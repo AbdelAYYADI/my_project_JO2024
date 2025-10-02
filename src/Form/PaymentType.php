@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class PaymentType extends AbstractType
 {
@@ -23,10 +24,11 @@ class PaymentType extends AbstractType
                 'label' => 'Date :',
                 'disabled' => true
             ])
-            ->add('totalPrice', TextType::class, [
+            ->add('totalPrice', MoneyType::class, [
                 'attr' => ['class' => 'form-control fs-3'],
                 'label' => 'Total à payer :',
                 'label_attr' => ['class' => 'form-label fs-3 text-primary'],
+                'currency' => 'EUR',
                 'disabled' => true
             ])
             ->add('submit', SubmitType::class, [
