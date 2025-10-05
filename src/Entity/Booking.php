@@ -6,6 +6,7 @@ use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -28,11 +29,21 @@ class Booking
     private ?int $rateDiscount = null;
 
     #[ORM\Column]
+    #[Assert\Expression(
+        "this.getNetTotal() == this.getNetPrice() * this.getNbrPerson()",
+        message: "Le Net Total doit être égal au prix net unitaire multiplié par le nombre de personnes."
+    )]
     private ?float $netTotal = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
+    #[Assert\GreaterThan(
+        value: 0,
+        )
+    ]
     private ?int $nbrPerson = null;
 
+    #[Assert\NotBlank(message: 'Veuillez saisir le nom complet')]
+    #[Assert\NotNull()]
     #[ORM\Column(length: 255)]
     private ?string $fulllName = null;
 
