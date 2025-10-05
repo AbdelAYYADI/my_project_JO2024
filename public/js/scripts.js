@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     radio.addEventListener('click', () => {
       const personCount = radio.dataset.person;
        if (personCount) {
-        console.log(`→ Mise à jour du champ avec ${personCount}`);
+        //console.log(`→ Mise à jour du champ avec ${netPrice.value*nbrPersonField.value}`);
+        //console.log(`→ Mise à jour du champ avec ${personCount}`);
         nbrPersonField.value = personCount;
         rateDiscount.value   = radio.dataset.rate;
-        netPrice.value       = grossPrice.value*(1 - rateDiscount.value/100);
-        netTotal.value       = netPrice.value*nbrPersonField.value;
+        netPrice.value       = (grossPrice.value*(1 - rateDiscount.value/100)).toFixed(2);
+        netTotal.value       = (netPrice.value*nbrPersonField.value).toFixed(2);
         generateParticipantsFields(personCount);
       }
     });
