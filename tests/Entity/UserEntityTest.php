@@ -20,6 +20,15 @@ class UserEntityTest extends KernelTestCase
     private const INVALID_PASSWORD_VALUE = 'xxxxxxxxxx';
     private const PASSWORD_CONSTRAINT_MESSAGE = 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial et avoir au moins 10 caractères.';
 
+    private const VALID_FIRST_NAME = 'Abdel';
+    private const VALID_LAST_NAME = 'Abdel';
+    private const VALID_ADRESS1 = '7 Rue de la victoire';
+    private const VALID_POSTAL_CODE = '75012';
+    private const VALID_CITY = 'Paris';
+    private const VALID_COUNTRY = 'FRANCE';
+    private const VALID_PHONE_NUMBER= '0658452564';
+    private const VALID_ROLE_USER = 'ROLE_USER';
+
     private ValidatorInterface $validator;
 
     protected function setUp(): void
@@ -35,14 +44,14 @@ class UserEntityTest extends KernelTestCase
         $user = new User();
 
         $user
-            ->setFirstName('Abdel')
-            ->setLastName('Abdel')
-            ->setAdress1('7 Rue de la victoire')
-            ->setPostalCode('75012')
-            ->setCity('Paris')
-            ->setCountry('FRANCE')
-            ->setPhoneNumber('0658452564')
-            ->setRoles(['ROLE_USER'])      
+            ->setFirstName(self::VALID_FIRST_NAME)
+            ->setLastName(self::VALID_LAST_NAME)
+            ->setAdress1(self::VALID_ADRESS1)
+            ->setPostalCode(self::VALID_POSTAL_CODE)
+            ->setCity(self::VALID_CITY)
+            ->setCountry(self::VALID_COUNTRY)
+            ->setPhoneNumber(self::VALID_PHONE_NUMBER)
+            ->setRoles([self::VALID_ROLE_USER])      
             ->setEmail(self::VALID_EMAIL_VALUE)
             ->setPassword(self::VALID_PASSWORD_VALUE)
             ->setIsAdmin(false);
@@ -62,15 +71,15 @@ class UserEntityTest extends KernelTestCase
         $user = new User();
 
         $user
-            ->setFirstName('Abdel')
-            ->setAdress1('7 Rue de la victoire')
-            ->setPostalCode('75012')
-            ->setCity('Paris')
-            ->setCountry('FRANCE')
-            ->setRoles(['ROLE_USER'])      
+            ->setFirstName(self::VALID_FIRST_NAME)
+            ->setAdress1(self::VALID_ADRESS1)
+             ->setPostalCode(self::VALID_POSTAL_CODE)
+            ->setCity(self::VALID_CITY)
+            ->setCountry(self::VALID_COUNTRY)
+            ->setRoles([self::VALID_ROLE_USER])      
             ->setEmail(self::VALID_EMAIL_VALUE)
             ->setPassword(self::VALID_PASSWORD_VALUE)
-            ->setIsAdmin(false);;
+            ->setIsAdmin(false);
 
         $errors = $this->validator->validate($user);
 
@@ -89,14 +98,14 @@ class UserEntityTest extends KernelTestCase
         $user = new User();
 
         $user
-            ->setFirstName('Abdel')
-            ->setLastName('Abdel')
-            ->setAdress1('7 Rue de la victoire')
-            ->setPostalCode('75012')
-            ->setCity('Paris')
-            ->setCountry('FRANCE')
-            ->setPhoneNumber('0658452564')
-            ->setRoles(['ROLE_USER'])      
+            ->setFirstName(self::VALID_FIRST_NAME)
+            ->setLastName(self::VALID_LAST_NAME)
+            ->setAdress1(self::VALID_ADRESS1)
+             ->setPostalCode(self::VALID_POSTAL_CODE)
+            ->setCity(self::VALID_CITY)
+            ->setCountry(self::VALID_COUNTRY)
+            ->setPhoneNumber(self::VALID_PHONE_NUMBER)
+            ->setRoles([self::VALID_ROLE_USER])      
             ->setEmail(self::INVALID_EMAIL_VALUE)
             ->setPassword(self::VALID_PASSWORD_VALUE)
             ->setIsAdmin(false);
@@ -118,14 +127,14 @@ class UserEntityTest extends KernelTestCase
         $user = new User();
 
         $user
-            ->setFirstName('Abdel')
-            ->setLastName('Abdel')
-            ->setAdress1('7 Rue de la victoire')
-            ->setPostalCode('75012')
-            ->setCity('Paris')
-            ->setCountry('FRANCE')
-            ->setPhoneNumber('0658452564')
-            ->setRoles(['ROLE_USER'])      
+            ->setFirstName(self::VALID_FIRST_NAME)
+            ->setLastName(self::VALID_LAST_NAME)
+            ->setAdress1(self::VALID_ADRESS1)
+             ->setPostalCode(self::VALID_POSTAL_CODE)
+            ->setCity(self::VALID_CITY)
+            ->setCountry(self::VALID_COUNTRY)
+            ->setPhoneNumber(self::VALID_PHONE_NUMBER)
+            ->setRoles([self::VALID_ROLE_USER])      
             ->setEmail(self::VALID_EMAIL_VALUE)
             ->setPassword(self::INVALID_PASSWORD_VALUE)
             ->setIsAdmin(false);
