@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     #[Assert\NotBlank()]
     #[Assert\NotNull()]
-    #[Assert\Email()]
+    #[Assert\Email(message: 'L\'email {{ value }} n\'est pas valide')]
     #[Assert\Length(min:5, max: 180)]
     private ?string $email = null;
 
@@ -44,6 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank()]
     #[Assert\NotNull()]
     #[Assert\Length(min:10, max: 60)]
+    #[Assert\Regex([
+        'pattern' => '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{10,}$/',
+        'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre, un caractère spécial et avoir au moins 10 caractères.'
+        ]
+    )]
     private ?string $password = null;
 
     private ?string $plainPassword = null;
@@ -54,19 +59,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Uuid $securityKey = null;
 
     #[ORM\Column(length: 120)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'Veuillez saisir une valeur')]
     #[Assert\NotNull()]
     #[Assert\Length(min:3, max: 120)]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 120)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'Veuillez saisir une valeur')]
     #[Assert\NotNull()]
     #[Assert\Length(min:3, max: 120)]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 100)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'Veuillez saisir une valeur')]
     #[Assert\NotNull()]
     #[Assert\Length(min:5, max: 100)]
     private ?string $adress1 = null;

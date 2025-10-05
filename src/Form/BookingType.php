@@ -7,13 +7,14 @@ use Assert\NotBlank;
 use App\Entity\Booking;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class BookingType extends AbstractType {
 
@@ -52,23 +53,26 @@ class BookingType extends AbstractType {
                 'label' => 'Réduction %'
                 
             ])
-            ->add('grossPrice', TextType::class, [
+            ->add('grossPrice', MoneyType::class, [
                 'attr' => [
-                    'class' => 'form-label',
+                    'class' => 'form-control',
+                    'currency' => 'EUR',
                     'readonly' => true
                 ],
                 'label' => 'Prix Unitaire Brut'
             ])
-            ->add('netPrice', TextType::class, [
+            ->add('netPrice', MoneyType::class, [
                 'attr' => [
-                    'class' => 'form-label',
+                    'class' => 'form-control',
+                    'currency' => 'EUR',
                     'readonly' => true
                 ],
                 'label' => 'Prix Unitaire Net'
             ])
-            ->add('netTotal', TextType::class, [
+            ->add('netTotal', MoneyType::class, [
                 'attr' => [
-                    'class' => 'form-label',
+                    'class' => 'form-control',
+                    'currency' => 'EUR',
                     'readonly' => true
                 ],
                 'label' => 'Total Net'
