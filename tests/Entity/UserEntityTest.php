@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Uid\Uuid;
 
+use function PHPUnit\Framework\assertInstanceOf;
+
 class UserEntityTest extends KernelTestCase
 {
 
@@ -59,10 +61,10 @@ class UserEntityTest extends KernelTestCase
         $errors = $this->validator->validate($user);
 
         if (count($errors) > 0) {
-        foreach ($errors as $error) {
-            echo sprintf("Property '%s': %s\n", $error->getPropertyPath(), $error->getMessage());
+            foreach ($errors as $error) {
+                echo sprintf("Property '%s': %s\n", $error->getPropertyPath(), $error->getMessage());
+            }
         }
-    }
         $this->assertCount(0, $errors);
     }
 
@@ -149,5 +151,33 @@ class UserEntityTest extends KernelTestCase
         $this->assertCount(1, $errors);
         $this->assertEquals(self::PASSWORD_CONSTRAINT_MESSAGE, $errors[0]->getMessage());
     }
+
+    public function testGetEmail() {
+
+        $user = new User();
+
+        $value = 'dupont.duran@gmail.com';
+
+        $response = $user->setEmail($value);
+
+        $this->assertInstanceOf(User::class, $response);
+        $this->assertEquals($value, $user->getEmail());
+        $this->assertEquals($value, $user->getUserIdentifier());
+
+    }
+
+    public function testGetPassword() {
+
+        $user = new User();
+
+        $value = 'Dupand@Jeux2024@Paris';
+
+        $response = $user->setPassword($value);
+
+        $this->assertInstanceOf(User::class, $response);
+        $this->assertEquals($value, $user->getPassword());
+
+    }
+
 
 }
