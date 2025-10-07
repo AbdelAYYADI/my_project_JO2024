@@ -54,3 +54,4 @@ class HomeControllerTest extends WebTestCase
     }
 
 }
+
