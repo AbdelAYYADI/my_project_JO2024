@@ -2,7 +2,9 @@
 
 namespace App\Tests;
 
+use App\Entity\User;
 use App\Entity\Booking;
+use App\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -134,6 +136,67 @@ class BookingEntityTest extends KernelTestCase
         
         $this->assertCount(1, $errors);
         $this->equalTo('Le Net Total doit être égal au prix net unitaire multiplié par le nombre de personnes.', $errors[0]->getMessage());
+    }
+
+    public function testBookingEntityGetUser() {
+
+        $booking = new Booking();
+        $user    = new User();
+
+        $user
+            ->setEmail('dupont.durand@gmail.com')
+            ->setFirstName('Durand')
+            ->setFirstName('Dupont');
+
+        $booking
+            ->setUser($user)
+            ->setGrossPrice(100)
+            ->setNetPrice(90)
+            ->setNbrPerson(2)
+            ->setNetTotal(2*90)
+            ->setFullName('Dupont')
+            ->setIsConfirmed(false);
+        
+        $this->assertEquals($booking->getUser()->getEmail(), $user->getEmail());
+        $this->assertEquals($booking->getUser()->getFirstName(), $user->getFirstName());
+        $this->assertEquals($booking->getUser()->getLastName(), $user->getLastName());
+        
+    }
+
+    public function testBookingEntityGetEventSport() {
+
+        $booking = new Booking();
+        $user    = new User();
+        $event = new Event();
+
+        $user
+            ->setEmail('dupont.durand@gmail.com')
+            ->setFirstName('Durand')
+            ->setFirstName('Dupont');
+        
+        $event
+            ->setName('football')
+            ->setTitle('match quart de final')
+            ->setLocation('Stade de France');
+
+
+        $booking
+            ->setUser($user)
+            ->setEvent($event)
+            ->setGrossPrice(100)
+            ->setNetPrice(90)
+            ->setNbrPerson(2)
+            ->setNetTotal(2*90)
+            ->setFullName('Dupont')
+            ->setIsConfirmed(false);
+        
+        $this->assertEquals($booking->getUser()->getEmail(), $user->getEmail());
+        $this->assertEquals($booking->getUser()->getFirstName(), $user->getFirstName());
+        $this->assertEquals($booking->getUser()->getLastName(), $user->getLastName());
+        $this->assertEquals($booking->getEvent()->getName(), $event->getName());
+        $this->assertEquals($booking->getEvent()->getTitle(), $event->getTitle());
+        $this->assertEquals($booking->getEvent()->getLocation(), $event->getLocation());
+        
     }
 
 }
