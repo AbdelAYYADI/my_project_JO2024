@@ -62,6 +62,10 @@
                 <a href="{{ path('app_payment') }}" class="btn btn-outline-dark">
                     Passer au paiement
                 </a>
+            {% else %}
+                <a href="{{ path('app_payment') }}" class="btn btn-outline-secondary disabled">
+                    Passer au paiement
+                </a>
             {% endif %}
         </div>    
 
