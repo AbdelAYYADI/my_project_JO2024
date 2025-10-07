@@ -167,7 +167,7 @@ class BookingEntityTest extends KernelTestCase
 
         $booking = new Booking();
         $user    = new User();
-        $event = new Event();
+        $event   = new Event();
 
         $user
             ->setEmail('dupont.durand@gmail.com')
