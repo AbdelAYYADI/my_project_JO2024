@@ -179,5 +179,4 @@ class UserEntityTest extends KernelTestCase
 
     }
 
-
 }

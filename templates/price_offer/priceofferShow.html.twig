@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block body %}
+
+<div class="container w-25 border rounded bg-light-subtle mt-5 p-4">
+    <h4 class="text-center mb-4">Modifier une offre</h4>
+
+    {{ form_start(priceOffer) }}
+        {{ form_row(priceOffer.name) }}
+        {{ form_row(priceOffer.numberPerson) }}
+        {{ form_row(priceOffer.rateDiscount) }}
+
+        <div class="d-flex justify-content-between mt-4">
+            {{ form_widget(priceOffer.valider) }}            
+            <a href="{{ path('app_price_offer_index') }}" class="btn btn-secondary col-4 mx-auto mt-4" >Annuler</a>
+        </div>
+    {{ form_end(priceOffer) }}
+</div>
+    
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block body %}
+
+
+    <div class="container border rounded bg-light-subtle mt-2 text-start">
+    <table class="table table-striped caption-top mt-2">
+        <caption class="bg-secondary-subtle fs-4 text-center p-2"><strong>Liste des offres</strong></caption>
+        <thead>
+            <tr>
+                <th>Libellé</th>
+                <th>Nombre participants</th>
+                <th>Taux de réduction %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for priceOffer in priceOffers %}
+                <tr>
+                    <td>{{ priceOffer.name }}</td>
+                    <td>{{ priceOffer.numberPerson }}</td>
+                    <td>{{ priceOffer.rateDiscount }}</td>                                    
+                    <td class="text-center">
+                        {% if (priceOffer.numberPerson is not same as 1 ) %}
+                        <a href="{{ path('app_price_offer_show', {'id': priceOffer.id}) }}">
+                        	<span class="me-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 10 10">
+									<img src="{{ asset('images/pencil-square.svg') }}" alt="---">
+								</svg>
+						    </span>							
+                        </a>
+                        {% endif %}
+                    </td>                        
+                    <td>
+                        {% if (priceOffer.numberPerson is not same as 1 ) %}
+                            <form method="post" action="{{ path('app_price_offer_del', {'id': priceOffer.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette offre ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ priceOffer.id) }}">
+                                <button type="submit" style="background: none; border: none; padding: 0;" title="Supprimer">
+                                    <img src="{{ asset('images/trash.svg') }}" alt="Supprimer" style="width: 20px; height: 20px;">
+                                </button>
+                            </form>
+                        {% endif %}
+                    </td>                       
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    <div class="container text-start">
+        <a href="{{ path('app_price_offer_add') }}" class="mt-4 p-2 btn btn-md btn-secondary" style="width: 20%">Ajouter une offre</a>
+    </div>
+{% endblock %}
