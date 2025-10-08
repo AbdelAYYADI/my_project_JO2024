@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\PriceOfferRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PriceOfferRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity(fields: ['numberPerson'], message: 'Offre déjà existante pour ce nombre de participants')] 
 #[ORM\Entity(repositoryClass: PriceOfferRepository::class)]
 class PriceOffer
 {
