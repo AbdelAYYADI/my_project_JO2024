@@ -83,15 +83,15 @@
 									<!-- Default dropstart button -->
 									<div class="dropdown-divider"></div>
 									<h4 class="dropdown-header">
-																				<span class="me-2">
+										<span class="me-2">
 											<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-person" viewBox="0 0 10 10">
 												<img src="{{ asset('images/gear.svg') }}" alt="">
 											</svg>
 										</span>
 										<strong>Administration</strong>
 									</h4>
-									<a class="dropdown-item" href="{{ path('app_price_offer_index') }}">Offre de prix</a>
-									<a class="dropdown-item" href="#">Stats ventes</a>									
+									<a class="dropdown-item" href="{{ path('app_price_offer_index') }}">Offres de prix</a>
+									<a class="dropdown-item" href="{{ path('app_stats_ventes') }}">Stats ventes</a>									
 								{% endif %}
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{{ path('app_logout') }}">

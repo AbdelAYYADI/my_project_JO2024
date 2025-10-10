@@ -1,0 +1,27 @@
+<h4 class="text-center fs-lg fw-bolder">Stats ventes par compte utilisateur</h4>
+<table class="table table-lg table-bordered mt-4">
+    <thead class="bg-light">
+    <tr class="lh-lg">
+        <th>Email</th>
+        <th>Nom-Prénom</th>
+        <th>Sport</th>
+        <th>Evènement</th>
+        <th>Lieu</th>
+        <th>Participants</th>
+        <th>Total ventes €</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for vente in ventes %}
+        <tr class="fs-sm lh-lg mt-2">
+            <td  class="fs-sm"> {{ vente.email }}</td>
+            <td> {{ vente.first_name }} - {{ vente.last_name }}</td>
+            <td> {{ vente.event_name }}</td>
+            <td> {{ vente.title }}</td>
+            <td> {{ vente.location }}</td>
+            <td class="text-center"> {{ vente.nbr_personnes }}</td>
+            <td class="text-end"> {{ vente.total|number_format(2,',',' ') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

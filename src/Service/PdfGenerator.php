@@ -12,16 +12,17 @@ class PdfGenerator {
 
     public function __construct() {
         
-        $this->domPdf = new Dompdf();
         
         //Définir les options du document PDF
         $pdfOptions = new Options();
         $pdfOptions->setTempDir('/tmp');
         $pdfOptions->setDefaultPaperSize('A4');
-        $pdfOptions->setDefaultPaperOrientation('portrait');
+        $pdfOptions->setDefaultPaperOrientation('landscape');
         $pdfOptions->setIsRemoteEnabled(true);
 
-        $this->domPdf->setOptions($pdfOptions);
+        $this->domPdf = new Dompdf($pdfOptions);
+
+        //$this->domPdf->setOptions($pdfOptions);
     }
 
     //Cette méthode télécharge le fichier PDF

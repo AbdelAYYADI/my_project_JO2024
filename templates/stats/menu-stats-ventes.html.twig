@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Site des JO Paris-2024  {% endblock %}
+
+{% block body %}
+
+    <div class="container w-50 border rounded bg-light-subtle mt-4">
+        <h4 class="mt-3 mb-3 text-center"> Statistiques des ventes</h4>
+        <p><a href="{{ path('app_stats_ventes_sport') }}">CA Ventes par discipline sportive PDF</a></p>
+        <p><a href="{{ path('app_stats_ventes_event') }}">CA Ventes par évenement sportif PDF</a></p>
+        <p><a href="{{ path('app_stats_ventes_location') }}">CA Ventes par évenement et lieu de cométition PDF</a></p>
+        <p><a href="{{ path('app_stats_ventes_user') }}">CA Ventes par compte utilisateur PDF</a></p>
+    </div>
+    
+{% endblock body %}
