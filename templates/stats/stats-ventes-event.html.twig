@@ -1,0 +1,19 @@
+<h4 class="text-center fs-lg fw-bolder">Stats ventes par évenement sportif</h4>
+<table class="table table-lg table-bordered mt-4">
+    <thead class="bg-light">
+    <tr class="lh-lg">
+        <th>Evènement</th>
+        <th>Participants</th>
+        <th>Total ventes €</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for vente in ventes %}
+        <tr class="fs-sm lh-lg mt-2">
+            <td> {{ vente.event_name }}</td>
+            <td class="text-center"> {{ vente.nbr_personnes }}</td>
+            <td class="text-end"> {{ vente.total|number_format(2,',',' ') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
