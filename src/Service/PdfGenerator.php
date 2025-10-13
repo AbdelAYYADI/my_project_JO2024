@@ -12,7 +12,6 @@ class PdfGenerator {
 
     public function __construct() {
         
-        
         //Définir les options du document PDF
         $pdfOptions = new Options();
         $pdfOptions->setTempDir('/tmp');
@@ -21,8 +20,6 @@ class PdfGenerator {
         $pdfOptions->setIsRemoteEnabled(true);
 
         $this->domPdf = new Dompdf($pdfOptions);
-
-        //$this->domPdf->setOptions($pdfOptions);
     }
 
     //Cette méthode télécharge le fichier PDF
