@@ -12,7 +12,6 @@ class PdfGenerator {
 
     public function __construct() {
         
-        
         //Définir les options du document PDF
         $pdfOptions = new Options();
         $pdfOptions->setTempDir('/tmp');
@@ -21,21 +20,20 @@ class PdfGenerator {
         $pdfOptions->setIsRemoteEnabled(true);
 
         $this->domPdf = new Dompdf($pdfOptions);
-
-        //$this->domPdf->setOptions($pdfOptions);
     }
 
     //Cette méthode télécharge le fichier PDF
-    public function streamPdfFile($html, $nameFile) {
+    public function streamPdfFile($html, $filename) {
+        
         ob_start();
         $this->domPdf->loadHtml($html);
         $this->domPdf->render();
-        return $this->domPdf->stream($nameFile);     
+        return $this->domPdf->stream($filename);            
         ob_end_clean();
     }
 
     //Cette méthode ouvre le fichier PDF dans le navigateur
-    public function showPfdFile($html) : string {
+    public function showPdfFile($html) : string {
         ob_start();
         $this->domPdf->loadHtml($html);
         $this->domPdf->render();
