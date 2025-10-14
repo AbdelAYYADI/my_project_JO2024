@@ -21,3 +21,4 @@ Ouvrez le terminal de votre ordinateur, allez dans le dossier d'installation du 
  	=> configurez le port de votre serveur web (ex Apache) afin q'il pointe sur le dossier de l'application
  	=> ex : http://127.0.0.1:8001/
 
+
