@@ -14,7 +14,7 @@ Ouvrez le terminal de votre ordinateur, allez dans le dossier d'installation du 
 
 => Tapez la commande : git clone https://github.com/AbdelAYYADI/my_project_JO2024.git + ENTREE
 
-    => Dans le terminal allez dans le sous dossier créé par le clonage
+    => Dans le terminal allez dans le sous dossier créé par le clonage (par défaut : my_project_JO2024)
     
     => Tapez la commande : composer install + ENTREE
 
@@ -37,6 +37,7 @@ Ouvrez le terminal de votre ordinateur, allez dans le dossier d'installation du 
  	=> configurez le port de votre serveur web (ex Apache) afin q'il pointe sur le dossier de l'application
     
  	=> ex : http://127.0.0.1:8001/
+
 
 
 
